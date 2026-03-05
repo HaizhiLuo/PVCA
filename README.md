@@ -4,37 +4,46 @@
 
 This repository contains the official implementation and demonstration code for the paper: **"PVCA: Cellular Automata and Spatiotemporal Big Data Driven Framework for Solar Photovoltaic Deployment"**.
 
-The PVCA  framework integrates Cellular Automata with spatiotemporal big data to simulate and optimize the spatial layout of solar photovoltaic (PV) installations. To ensure that the code can be executed locally on most standard computers, this demonstration utilizes a **lower spatial resolution strategy** (including an additional resampling step to convert 50m PV data to 100m) to reduce computational overhead while maintaining the integrity of the model logic.
+The **PVCA (Photovoltaic Cellular Automata)** framework integrates Cellular Automata with spatiotemporal big data to simulate and optimize the spatial layout of solar photovoltaic (PV) installations.
 
-## 📂 Repository Structure
+> **Note on Performance:** To ensure that the code can be executed locally on most standard computers, this demonstration utilizes a **lower spatial resolution strategy**. This includes an additional resampling operation, significantly reducing computational overhead while maintaining model integrity.
 
-The project is organized into several Jupyter Notebooks following the research workflow:
+## 🛠️ Hybrid Workflow (ArcMap + Python)
 
-### Core Methodology
+The methodology follows a hybrid approach, leveraging the spatial processing power of **ArcMap** for foundational data preparation and **Python/Jupyter** for core modeling.
 
-* **`S1_CalculateShapleyScore.ipynb`**: Calculates non-linear effects and implements spatialization. It quantifies the influence of various driving factors on PV deployment using Shapley values.
-* **`S2_ConstructionSuitabilityAtlas.ipynb`**: Establishes the PV Construction Suitability Atlas. It synthesizes multi-source big data to generate the foundational suitability maps required for CA simulation.
-* **`S3_PVCA_Simulation_Examples.ipynb`**: Provides interactive simulation examples. It demonstrates how the PVCA framework drives the spatiotemporal evolution of PV capacity under different scenarios.
+### 1. GIS Preprocessing (ArcMap)
 
-### Statistical Analysis & Preprocessing
+Before running the provided scripts, the following operations are conducted within **ArcMap**:
 
-* **`Z1_StatisticalSampling_CategoricalVariables.ipynb`**: Statistical sampling and analysis for categorical variables (e.g., land use types, administrative divisions).
-* **`Z_StatisticalSampling_ContinuousVariable.ipynb`**: Statistical sampling and data cleaning for continuous variables (e.g., solar irradiance, slope, distance to grid).
+* **Geospatial Preprocessing**: Projection transformations, clipping, and alignment of multi-source spatial datasets.
+* **Basic Spatial Calculations**: Generation of Euclidean distances, slope/aspect analysis from DEM, and zonal statistics.
+* **Data Preparation**: Initial cleaning of raw spatiotemporal big data.
+* **PV Status Analysis**: Spatial distribution analysis of current photovoltaic installations to establish the baseline for simulation.
+* ... ... ...
 
-## 🛠️ Usage & Performance Optimization
+### 2. Core Modeling & Simulation (Jupyter Notebooks)
 
-1. **Spatial Resampling**: Please note that this version includes a specific step to downsample 50m data to 100m. This is intentional to ensure the model remains accessible for local testing without high-end server requirements.
-2. **Execution Order**: It is recommended to run the notebooks in the sequence of **S1 $\rightarrow$ S2 $\rightarrow$ S3** to ensure that intermediate variables and suitability maps are correctly generated.
-3. **Customization**: Users can modify the transition rules and parameters within `S3` to explore how different policy constraints or environmental factors impact the future layout of solar energy.
+Once the GIS layers are prepared, the analysis proceeds through the following notebooks:
 
-## 🚀 Environment Setup
+* **`S1_CalculateShapleyScore.ipynb`**: Calculates non-linear effects and implements spatialization. It quantifies the influence of driving factors on PV deployment using Shapley values.
+* **`S2_ConstructionSuitabilityAtlas.ipynb`**: Establishes the PV Construction Suitability Atlas by synthesizing processed GIS layers.
+* **`S3_PVCA_Simulation_Examples.ipynb`**: Interactive simulation demonstrating the spatiotemporal evolution of PV capacity.
+* **`Z1_StatisticalSampling_CategoricalVariables.ipynb`**: Statistical sampling for categorical variables (e.g., land use).
+* **`Z_StatisticalSampling_ContinuousVariable.ipynb`**: Statistical sampling and cleaning for continuous variables (e.g., irradiance, proximity).
+* ... ... ...
 
-The following libraries are required to run the notebooks:
+## 🚀 Getting Started
 
-* `numpy`, `pandas` (Data manipulation)
-* `geopandas`, `rasterio` (Geospatial analysis)
-* `matplotlib`, `seaborn` (Visualization)
-* `shap` (For Shapley value calculations in S1)
-* `scikit-learn` (Machine learning utilities)
-* `... ... ...
----
+1. **Prepare GIS Data**: Use ArcMap to export your spatial variables as TIFF or ASCII formats compatible with `rasterio`/`numpy`.
+2. **Environment Setup**:
+```bash
+pip install numpy pandas geopandas rasterio matplotlib seaborn shap scikit-learn ... ... ...
+```
+
+3. **Run Sequence**: Execute notebooks in the order **S1 $\rightarrow$ S2 $\rightarrow$ S3**. Ensure that the resampling logic in the scripts matches your desired output resolution.
+
+## 📄 Citation
+
+If you use this framework or code in your research, please cite the original paper:
+*PVCA: Cellular Automata and Spatiotemporal Big Data Driven Framework for Solar Photovoltaic Deployment*
