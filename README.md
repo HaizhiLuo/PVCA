@@ -30,7 +30,8 @@ Once the GIS layers are prepared, the analysis proceeds through the following no
 * **`S2_ConstructionSuitabilityAtlas.ipynb`**: Establishes the PV Construction Suitability Atlas by synthesizing processed GIS layers.
 * **`S3_PVCA_Simulation_Examples.ipynb`**: Interactive simulation demonstrating the spatiotemporal evolution of PV capacity.
 * **`Z1_StatisticalSampling_CategoricalVariables.ipynb`**: Statistical sampling for categorical variables (e.g., land use).
-* **`Z3_StatisticalSampling_ContinuousVariable.ipynb`**: Statistical sampling and cleaning for continuous variables (e.g., irradiance, proximity).
+* **`Z2_GeoDataPreprocessingAlignment.ipynb`**：Preprocessing of geographic data.
+* **`Z3_StatisticalSampling_ContinuousVariable.ipynb`**: Statistical sampling and cleaning for continuous variables (e.g., Meteorology, society, distance, elevation).
 * ... ... ...
 
 ## 🚀 Getting Started
